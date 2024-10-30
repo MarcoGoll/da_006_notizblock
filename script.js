@@ -4,13 +4,12 @@ function renderNotes() {
     let contentRef = document.getElementById('content');
     contentRef.innerHTML = '';
     for (let i = 0; i < notes.length; i++) {
-        const note = notes[i];
-        contentRef.innerHTML += getNoteTemplate(note);
+        contentRef.innerHTML += getNoteTemplate(i);
     }
 }
 
-function getNoteTemplate(note) {
-    return `<p class="note">+ ${note}</p>`;
+function getNoteTemplate(i) {
+    return `<p class="note">+ ${notes[i]}<button class="closeBtn" onclick="deleteNote(${i})">x</button></p>`;
 }
 
 function addNote() {
@@ -22,5 +21,8 @@ function addNote() {
     noteInputRef.value = '';
 }
 
-// notizen löschen
+function deleteNote(index) {
+    notes.splice(index, 1);
+    renderNotes();
+}
 // notizen archivieren
