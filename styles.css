@@ -1,3 +1,5 @@
+/*Style hier Structuren von Container. Dinge wie flex height with etc*/
+
 #content,
 #trashContent {
     display: flex;

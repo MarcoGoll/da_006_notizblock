@@ -27,14 +27,6 @@ function renderTrashNotes() {
     }
 }
 
-function getNoteTemplate(i) {
-    return `<p class="note"><b>${noteTitles[i]}:</b> + ${notes[i]}<button class="closeBtn" onclick="trashNote(${i})">x</button></p>`;
-}
-
-function getTrashNoteTemplate(i) {
-    return `<p class="note"><b>${trashNoteTitles[i]}:</b> + ${trashNotes[i]}<button class="closeBtn" onclick="deleteNote(${i})">x</button></p>`;
-}
-
 function addNote() {
     let noteInputRef = document.getElementById('inpNewNote');
     let noteInput = noteInputRef.value;
