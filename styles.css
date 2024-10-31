@@ -1,4 +1,5 @@
-#content {
+#content,
+#trashContent {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
