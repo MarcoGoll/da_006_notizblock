@@ -11,10 +11,12 @@
     <script src="./script.js"></script>
 </head>
 
-<body onload="renderNotes()">
+<body onload="init()">
     <h1>Notizblock</h1>
-    <input type="text" name="newNote" id="inpNewNote">
-    <button onclick="addNote()">Notiz speichern</button>
+    <input type="text" name="newNoteTitle" id="inpNewNoteTitle" placeholder="Title">
+    <input type="text" name="newNote" id="inpNewNote" placeholder="Note">
+    <button onclick="addNote()">Notiz übernehmen</button>
+    <button onclick="saveToLocalStorage()">Notizen speichern</button>
     <h2>Notes</h2>
     <div id="content">
 
