@@ -4,11 +4,14 @@ let notes = [];
 let trashNoteTitles = [];
 let trashNotes = [];
 
+let archiveNoteTitles = [];
+let archiveNotes = [];
 
 function init() {
     loadFromLocalStorage();
     renderNotes();
     renderTrashNotes();
+    renderArchiveNotes();
 }
 
 function renderNotes() {
@@ -27,6 +30,14 @@ function renderTrashNotes() {
     }
 }
 
+function renderArchiveNotes() {
+    let archiveContentRef = document.getElementById('archiveContent');
+    archiveContentRef.innerHTML = '';
+    for (let i = 0; i < archiveNotes.length; i++) {
+        archiveContentRef.innerHTML += getArchiveNoteTemplate(i);
+    }
+}
+
 function addNote() {
     let noteInputRef = document.getElementById('inpNewNote');
     let noteInput = noteInputRef.value;
@@ -40,18 +51,31 @@ function addNote() {
     noteInputTitleRef.value = '';
 }
 
-function trashNote(index) {
-    let trashNote = notes.splice(index, 1);
-    trashNotes.push(trashNote[0]);
-    let trashNoteTitle = noteTitles.splice(index, 1);
-    trashNoteTitles.push(trashNoteTitle[0]);
+function recoverNote(index, from) { }
+
+function trashNote(index, from) {
+    let trashNote = notes.splice(index, 1); // tbd ifelse von welchem Array?!
+    trashNotes.push(trashNote[0]); // tbd ifelse add to welchem Array?!
+    let trashNoteTitle = noteTitles.splice(index, 1); // tbd ifelse von welchem Array?!
+    trashNoteTitles.push(trashNoteTitle[0]); // tbd ifelse add to welchem Array?!
     renderNotes();
     renderTrashNotes();
+    renderArchiveNotes();
 }
 
 function deleteNote(index) {
-    trashNotes.splice(index, 1);
+    trashNotes.splice(index, 1); // Löschen geht nur vom Trash
     renderTrashNotes();
+}
+
+function archiveNote(index, from) {
+    let archiveNote = notes.splice(index, 1); // tbd ifelse von welchem Array?!
+    trashNotes.push(trashNote[0]); // tbd ifelse add to welchem Array?!
+    let trashNoteTitle = noteTitles.splice(index, 1); // tbd ifelse von welchem Array?!
+    trashNoteTitles.push(trashNoteTitle[0]); // tbd ifelse add to welchem Array?!
+    renderNotes();
+    renderTrashNotes();
+    renderArchiveNotes();
 }
 
 function saveToLocalStorage() {
@@ -59,6 +83,8 @@ function saveToLocalStorage() {
     localStorage.setItem("notes", JSON.stringify(notes));
     localStorage.setItem("trashNoteTitles", JSON.stringify(trashNoteTitles));
     localStorage.setItem("trashNotes", JSON.stringify(trashNotes));
+    localStorage.setItem("archiveNoteTitles", JSON.stringify(archiveNoteTitles));
+    localStorage.setItem("archiveNotes", JSON.stringify(archiveNotes));
 }
 
 function loadFromLocalStorage() {
@@ -66,15 +92,17 @@ function loadFromLocalStorage() {
     let loadedNote = JSON.parse(localStorage.getItem("notes"));
     let loadedTrashNoteTitle = JSON.parse(localStorage.getItem("trashNoteTitles"));
     let loadedTrashNote = JSON.parse(localStorage.getItem("trashNotes"));
+    let loadedArchiveNoteTitle = JSON.parse(localStorage.getItem("archiveNoteTitles"));
+    let loadedArchiveNote = JSON.parse(localStorage.getItem("archiveNotes"));
 
-    if (loadedNoteTitle == null || loadedNote == null || loadedTrashNoteTitle == null || loadedTrashNote == null) {
+    if (loadedNoteTitle == null || loadedNote == null || loadedTrashNoteTitle == null || loadedTrashNote == null || loadedArchiveNoteTitle == null || loadedArchiveNote == null) {
         console.info("Mindestens eines der local gespeicherten Notiz-Daten ist nicht vorhanden. Die Notizen wurden daher nicht geladen.");
     } else {
         noteTitles = loadedNoteTitle;
         notes = loadedNote;
         trashNoteTitles = loadedTrashNoteTitle;
         trashNotes = loadedTrashNote;
+        archiveNoteTitles = loadedTrashNoteTitle;
+        archiveNotes = loadedArchiveNote;
     }
 }
-
-// notizen archivieren

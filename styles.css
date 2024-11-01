@@ -1,7 +1,8 @@
 /*Style hier Structuren von Container. Dinge wie flex height with etc*/
 
 #content,
-#trashContent {
+#trashContent,
+#archiveContent {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
