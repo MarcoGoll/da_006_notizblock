@@ -15,25 +15,38 @@ button {
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 8px 16px;
     border-radius: 8px;
-}
-
-.stdBtn:hover {
     color: white;
 }
 
-.deleteBtn:hover {
+.deleteBtn {
     background-color: red;
 }
 
-.trashBtn:hover {
+.deleteBtn:hover {
+    background-color: rgb(255, 67, 67);
+}
+
+.trashBtn {
     background-color: orange;
 }
 
-.archiveBtn:hover {
+.trashBtn:hover {
+    background-color: rgb(255, 188, 64);
+}
+
+
+.archiveBtn {
     background-color: blue;
 }
 
-.noteBtn:hover {
+.archiveBtn:hover {
+    background-color: rgb(36, 36, 253);
+}
+
+.noteBtn {
     background-color: green;
-    color: white;
+}
+
+.noteBtn:hover {
+    background-color: rgb(13, 124, 13);
 }

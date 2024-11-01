@@ -51,13 +51,38 @@ function addNote() {
     noteInputTitleRef.value = '';
 }
 
-function recoverNote(index, from) { }
+//
+function recoverNote(index, from) {
+    let note = '';
+    let noteTitle = '';
+    if (from == "fromTrash") {
+        note = trashNotes.splice(index, 1);
+        noteTitle = trashNoteTitles.splice(index, 1);
+
+    } else if (from == "fromArchive") {
+        note = archiveNotes.splice(index, 1);
+        noteTitle = archiveNoteTitles.splice(index, 1);
+    }
+    notes.push(note[0]);
+    noteTitles.push(noteTitle[0]);
+    renderNotes();
+    renderTrashNotes();
+    renderArchiveNotes();
+}
 
 function trashNote(index, from) {
-    let trashNote = notes.splice(index, 1); // tbd ifelse von welchem Array?!
-    trashNotes.push(trashNote[0]); // tbd ifelse add to welchem Array?!
-    let trashNoteTitle = noteTitles.splice(index, 1); // tbd ifelse von welchem Array?!
-    trashNoteTitles.push(trashNoteTitle[0]); // tbd ifelse add to welchem Array?!
+    let trashNote = '';
+    let trashNoteTitle = '';
+    if (from == "fromNotes") {
+        trashNote = notes.splice(index, 1);
+        trashNoteTitle = noteTitles.splice(index, 1);
+
+    } else if (from == "fromArchive") {
+        trashNote = archiveNotes.splice(index, 1);
+        trashNoteTitle = archiveNoteTitles.splice(index, 1);
+    }
+    trashNotes.push(trashNote[0]);
+    trashNoteTitles.push(trashNoteTitle[0]);
     renderNotes();
     renderTrashNotes();
     renderArchiveNotes();
@@ -69,10 +94,17 @@ function deleteNote(index) {
 }
 
 function archiveNote(index, from) {
-    let archiveNote = notes.splice(index, 1); // tbd ifelse von welchem Array?!
-    trashNotes.push(trashNote[0]); // tbd ifelse add to welchem Array?!
-    let trashNoteTitle = noteTitles.splice(index, 1); // tbd ifelse von welchem Array?!
-    trashNoteTitles.push(trashNoteTitle[0]); // tbd ifelse add to welchem Array?!
+    let archiveNote = '';
+    let archiveNoteTitle = '';
+    if (from == "fromNotes") {
+        archiveNote = notes.splice(index, 1);
+        archiveNoteTitle = noteTitles.splice(index, 1);
+    } else if (from == "fromTrash") {
+        archiveNote = trashNotes.splice(index, 1);
+        archiveNoteTitle = trashNoteTitles.splice(index, 1);
+    }
+    archiveNotes.push(archiveNote[0]); // tbd ifelse add to welchem Array?!
+    archiveNoteTitles.push(archiveNoteTitle[0]); // tbd ifelse add to welchem Array?!
     renderNotes();
     renderTrashNotes();
     renderArchiveNotes();
@@ -102,7 +134,7 @@ function loadFromLocalStorage() {
         notes = loadedNote;
         trashNoteTitles = loadedTrashNoteTitle;
         trashNotes = loadedTrashNote;
-        archiveNoteTitles = loadedTrashNoteTitle;
+        archiveNoteTitles = loadedArchiveNoteTitle;
         archiveNotes = loadedArchiveNote;
     }
 }
